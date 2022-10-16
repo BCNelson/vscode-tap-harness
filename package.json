@@ -3,23 +3,99 @@
   "displayName": "Tap Harness",
   "description": "Test Anything Protocol Support",
   "version": "0.0.1",
+  "publisher": "bcnelson",
   "engines": {
     "vscode": "^1.72.0"
   },
+  "preview": true,
   "categories": [
-    "Other"
+    "Testing"
   ],
   "activationEvents": [
-    "onCommand:tap-harness.helloWorld"
+    "onCommand:tap-harness.autoDiscoverProducer",
+    "onStartupFinished"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "tap-harness.helloWorld",
-        "title": "Hello World"
+        "command": "tap-harness.autoDiscoverProducer",
+        "title": "Discover Tap Producers"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Tap Harness",
+      "properties": {
+        "tap-harness.mode": {
+          "type": "string",
+          "description": "Mode",
+          "enum": [
+            "files",
+            "producer",
+            "advanced"
+          ],
+          "enumItemLabels": [
+            "Files",
+            "Tap Producer",
+            "Advanced"
+          ],
+          "enumDescriptions": [
+            "Scan local files",
+            "Use a tap producer",
+            "Use the Advanced Configuration"
+          ],
+          "default": "files",
+          "order": 0
+        },
+        "tap-harness.testFiles.globs": {
+          "type": "array",
+          "description": "Globs to search for tap files",
+          "default": [
+            "**/*.tap"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "scope": "window",
+          "order": 10
+        },
+        "tap-harness.tapProducer.executable": {
+          "type": "string",
+          "default": "tap",
+          "description": "The path to the Tap executable",
+          "scope": "window",
+          "order": 20
+        },
+        "tap-harness.tapProducer.arguments": {
+          "type": "array",
+          "description": "Any Arguments that need to be passed to the executable",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "scope": "window",
+          "order": 30
+        },
+        "tap-harness.advancedConfigs":{
+          "type": "array",
+          "default": [],
+          "description": "Tap Harness Advanced Configs",
+          "order": 40,
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "files",
+                  "executable"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
@@ -33,19 +109,22 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.72.0",
     "@types/glob": "^8.0.0",
     "@types/mocha": "^10.0.0",
     "@types/node": "16.x",
+    "@types/vscode": "^1.72.0",
     "@typescript-eslint/eslint-plugin": "^5.38.1",
     "@typescript-eslint/parser": "^5.38.1",
+    "@vscode/test-electron": "^2.1.5",
     "eslint": "^8.24.0",
     "glob": "^8.0.3",
     "mocha": "^10.0.0",
-    "typescript": "^4.8.4",
     "ts-loader": "^9.4.1",
+    "typescript": "^4.8.4",
     "webpack": "^5.74.0",
-    "webpack-cli": "^4.10.0",
-    "@vscode/test-electron": "^2.1.5"
+    "webpack-cli": "^4.10.0"
+  },
+  "dependencies": {
+    "tap-parser": "^11.0.1"
   }
 }
