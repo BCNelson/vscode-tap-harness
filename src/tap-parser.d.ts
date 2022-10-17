@@ -1,6 +1,6 @@
-
-declare module "tap-parser" {
-    export default class Parser {
+declare module 'tap-parser' {
+    import Minipass from 'minipass';
+    export default class Parser extends Minipass {
         constructor();
         constructor(options: ParserOptions);
         constructor(callback: (result: CompleteData) => void)

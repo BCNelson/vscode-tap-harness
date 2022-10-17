@@ -30,14 +30,18 @@ const extensionConfig = {
   module: {
     rules: [
       {
-        test: /\.ts$/,
+        test: /(?<!\.d)\.tsx?$/,
         exclude: /node_modules/,
         use: [
           {
             loader: 'ts-loader'
           }
         ]
-      }
+      },
+      {
+          test: /\.d\.ts$/,
+          loader: 'ignore-loader'
+      },
     ]
   },
   devtool: 'nosources-source-map',
