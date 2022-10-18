@@ -17,7 +17,6 @@ export class FilesModeController extends ModeController {
 
         this.globs.map(async glob => {
             await workspace.findFiles(glob).then((files) => {
-                console.log("Found files", files);
                 files.forEach(this.createFile.bind(this));
             });
 

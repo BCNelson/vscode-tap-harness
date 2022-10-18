@@ -2,7 +2,7 @@
   "name": "tap-harness",
   "displayName": "Tap Harness",
   "description": "Test Anything Protocol Support",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "bcnelson",
   "repository": {
     "type": "git",
@@ -11,12 +11,13 @@
   "engines": {
     "vscode": "^1.63.0"
   },
+  "icon": "images/logo.png",
   "preview": true,
   "categories": [
     "Testing"
   ],
   "activationEvents": [
-    "*"
+    "onStartupFinished"
   ],
   "main": "./dist/extension.js",
   "contributes": {

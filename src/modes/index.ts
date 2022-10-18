@@ -12,7 +12,12 @@ export enum Mode {
     advanced = 'advanced',
 }
 
-export function getModeController(mode: Mode): ModeController {
+export const ALL_MODES = [Mode.files, Mode.producer, Mode.advanced];
+
+export function getModeController(mode: Mode, allowedModes: string[] = ALL_MODES): ModeController {
+    if (!allowedModes.includes(mode)) {
+        throw new Error(`Mode ${mode} is not allowed in this context`);
+    }
     let workspaceConfig = workspace.getConfiguration('tap-harness');
     switch (mode) {
         case Mode.files:

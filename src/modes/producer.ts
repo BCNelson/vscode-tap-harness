@@ -29,7 +29,6 @@ export class ProducerModeController extends ModeController {
     }
 
     private runHandler(request: vscode.TestRunRequest, cancellationToken: vscode.CancellationToken) {
-        console.log("Running tests");
         const run = this.controller.createTestRun(request);
         const workspaceFolder = vscode.workspace.workspaceFolders;
         if (!workspaceFolder) {

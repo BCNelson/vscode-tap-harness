@@ -6,7 +6,6 @@ import { ModeController, Mode, getModeController } from './modes';
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	console.log('Extension "tap-harness" is now active!');
 	let configuration = vscode.workspace.getConfiguration('tap-harness');
 	let mode: Mode = configuration.get("mode", "files") as Mode;
 	let modeController: ModeController = getModeController(mode);
