@@ -71,15 +71,24 @@ export abstract class ModeController {
             } else if (testCase.skip) {
                 item.description = `SKIP: ${testCase.skip}`;
             } else {
-                item.description = '';
+                item.description = testCase.diag !== undefined ? 'diagnostic info in test output' : '';
+            }
+
+            if (testCase.diag !== undefined) {
+                try {
+                    const diag = JSON.stringify(testCase.diag,null,0);
+                    run.appendOutput(diag, undefined, item);
+                } catch (error) {
+                    run.appendOutput("Error parsing diagnostic info", undefined, item);
+                }
             }
 
             if (testCase.skip){
                 run.skipped(item);
             } else if (testCase.ok){
-                run.passed(item);
+                run.passed(item, testCase.time);
             } else {
-                run.failed(item, testCase.testMessage);
+                run.failed(item, testCase.testMessage, testCase.time);
             }
         }
     }

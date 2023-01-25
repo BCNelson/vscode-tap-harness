@@ -6,6 +6,8 @@ This adds Test Anything Protocol (TAP) support to VS Code
 
 - Read/Watch TAP files and display the results in the Test Explorer
 - Run TAP tests in the Test Explorer
+- Read diagnostic information in the test output
+- View TAP test duration per test
 
 ## Requirements
 
@@ -25,11 +27,5 @@ This extension contributes the following settings:
 ## Known Issues
 
 None at the moment.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 0.1.0 - Initial release
 
 ---

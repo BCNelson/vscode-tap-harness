@@ -35,6 +35,8 @@ export class TestCase {
     }
 
     get testMessage(): TestMessage {
-        return new TestMessage('not ok');
+        let message: string = this.ok ? "ok" : "not ok";
+        const testMessage = new TestMessage(message);
+        return testMessage;
     }
 }
