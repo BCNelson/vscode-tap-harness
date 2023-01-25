@@ -16,7 +16,7 @@ export abstract class ModeController {
         this.subscriptions.forEach(s => s.dispose());
     }
 
-    async run(controller: TestController, tap: string | TapNode[], run: vscode.TestRun) {
+    async run(controller: TestController, tap: string | TapNode[], run: vscode.TestRun, uri?: vscode.Uri) {
         let items: Map<string, vscode.TestItem>;
         if (this.itemsMap.has(controller)) {
             items = this.itemsMap.get(controller)!;
@@ -39,7 +39,7 @@ export abstract class ModeController {
                 item.label = testCase.name || `Test ${testCase.id}`;
                 return item;
             } else {
-                const item = controller.createTestItem(testCase.id, testCase.name || `Test ${testCase.id}`);
+                const item = controller.createTestItem(testCase.id, testCase.name || `Test ${testCase.id}`, uri);
                 items.set(testCase.id, item);
                 return item;
             }

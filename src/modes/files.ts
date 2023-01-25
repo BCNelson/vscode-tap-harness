@@ -61,7 +61,7 @@ export class FilesModeController extends ModeController {
         return workspace.fs.readFile(uri).then((buffer) => {
             const tap = new TextDecoder().decode(buffer);
             const run = controller.createTestRun(new vscode.TestRunRequest(), label, true);
-            return this.run(controller, tap, run).then(() => run.end());
+            return this.run(controller, tap, run, uri).then(() => run.end());
         });
     }
 }
